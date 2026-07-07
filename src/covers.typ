@@ -29,7 +29,16 @@
 
       \
 
-      #text(size: 26pt, strong(title)) \
+      // without this `par`, multi-line titles would look very squished together
+      // (with low-hanging letters like `g` even touching tall letters like `P`)
+      // so we try our best. the official template uses 108% line height (from
+      // baseline to baseline), but there is no easy way to replicate that in
+      // Typst, so we just do this instead. 0.5em is what seems to look nicest
+      #text(size: 26pt, strong(par(
+        spacing: 0pt, // any extra surrounding margins would break the layout
+        leading: 0.5em, // magic number
+        title,
+      )))
       \
       #if subtitle != none [
         #text(size: 16pt, subtitle)
