@@ -64,8 +64,6 @@
 )
 
 #let back-cover(
-  trita-series: "EECS-EX",
-  trita-number: "2026:0000",
   year: 2026,
   style,
 ) = page(
@@ -80,10 +78,9 @@
 
     // I don't know why they want an en-dash here...
     [
-      TRITA -- #trita-series #trita-number \
       #set text(size: 8pt)
       #t("stockholm-sweden") #year \
-      #link("https://www.kth.se", "www.kth.se")
+      #link("https://www.ntnu.no/", "www.ntnu.no")
     ]
   },
 )

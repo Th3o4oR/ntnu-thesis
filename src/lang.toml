@@ -6,7 +6,7 @@ degree-project-in = "Degree Project in"
 cycle-1 = "First cycle"
 cycle-2 = "Second cycle"
 credits = "credits"
-stockholm-sweden = "Stockholm, Sweden"
+trondheim-norway = "Trondheim, Norway"
 date = "Date"
 supervisor = "Supervisor"
 supervisors = "Supervisors"
@@ -30,12 +30,12 @@ figure-table = "Table"
 figure-code = "Listing"
 separator-last = " and "                # Oxford comma would be weird for n=2
 
-[lang.sv]
+[lang.no]
 degree-project-in = "Examensarbete inom"
 cycle-1 = "Grundnivå"
 cycle-2 = "Avancerad nivå"
 credits = "hp"
-stockholm-sweden = "Stockholm, Sverige"
+trondheim-norway = "Trondheim, Norge"
 date = "Datum"
 supervisor = "Handledare"
 supervisors = "Handledare"

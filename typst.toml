@@ -1,14 +1,19 @@
 [package]
-name = "kthesis"
+name = "ntnu-thesis"
 version = "0.1.8"
 entrypoint = "src/lib.typ"
-authors = ["Rafael Oliveira <@RafDevX>"]
+authors = ["Theodor Johansson", "Rafael Oliveira <@RafDevX>"]
 license = "MIT AND MIT-0"
-description = "Unofficial thesis template for KTH Royal Institute of Technology"
-repository = "https://github.com/RafDevX/kthesis-typst"
+description = "Unofficial thesis template for NTNU (Forked from RafDevX)"
+# repository = "https://github.com/RafDevX/kthesis-typst"
 categories = ["thesis", "layout"]
-keywords = ["KTH", "Kungliga Tekniska högskolan", "exjobb", "master", "thesis"]
-compiler = "0.13.0"
+keywords = [
+    "NTNU",
+    "Norwegian University of Science and Technology",
+    "master",
+    "thesis",
+]
+compiler = "0.15.0"
 exclude = [".gitignore", "*.sh", "shell.nix", ".envrc"]
 
 [template]

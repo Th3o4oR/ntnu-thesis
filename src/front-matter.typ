@@ -5,14 +5,14 @@
   subtitle: "Primary Language Subtitle Goes Here", // may be none!
   alt-title: "Alternative Language Title Goes Here",
   alt-subtitle: "Alternative Language Subtitle Goes Here", // may be none!
-  alt-lang: "sv", // either "en" or "sv"
+  alt-lang: "no", // either "en" or "no"
   degree: "Master's Program, Computer Science",
   date: datetime.today(),
   authors: ("Newt Yellow", "Bellatrix Green"),
   supervisors: ("Minerva Red", "Filius Blue"),
   examiner-name: "Brian Gold",
-  examiner-school: "School of Electrical Engineering and Computer Science",
-  host-company: "Företaget AB", // may be none!
+  examiner-faculty: "Department of Engineering Cybernetics",
+  host-company: "Selskap AS", // may be none!
   host-org: "CERN", // may be none!
 ) = page(
   margin: (top: 65mm, bottom: 30mm, left: 74pt, right: 35mm),
@@ -50,7 +50,7 @@
     [
       *#super-label:* #join-names(supervisors) \
       *#t("examiner"):* #examiner-name \
-      #hide[*#t("examiner"):*] #emph(examiner-school) \
+      #hide[*#t("examiner"):*] #emph(examiner-faculty) \
     ]
 
     if host-company != none {

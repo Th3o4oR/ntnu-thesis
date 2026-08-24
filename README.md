@@ -1,10 +1,14 @@
-# KTHesis
+# NTNU-Thesis
 
 An unofficial, slightly opinionated, extensible [Typst](https://typst.app/home/)
-template for writing a Degree Project thesis for KTH Royal Institute of
-Technology in Stockholm, Sweden.
+template for writing a Degree Project thesis for NTNU in Trondheim, Norway.
 
-Inspired by and partially adapted from Gerald Q. Maguire Jr.'s LaTeX template
+Note that the front- and title-pages for theses at NTNU are automatically generated
+upon submission, so the ones present here serve only as temporary replacements. 
+
+Forked and currently maintained for NTNU by Theodor Johansson. Originally created
+by Rafael Oliveira at https://github.com/RafDevX/kthesis-typst, which was inspired
+by and partially adapted from Gerald Q. Maguire Jr.'s LaTeX template
 and KTH's official degree project report covers as published on the
 [institution's website](https://www.kth.se/en/omslag-till-ditt-exjobb-1.479838).
 
@@ -15,7 +19,7 @@ be sufficiently generic so to also be suitable for other kinds of reports. It
 strives to simplify drafting and counts with the following features, among
 others:
 
-- Supports both English and Swedish as primary language, with built-in
+- Supports both English and Norwegian as primary language, with built-in
   translations for template-managed headings and sections;
 - Supports additional Abstracts in other languages;
 - Supports arbitrary extra preamble sections, such as a Glossary / Table of
@@ -29,9 +33,7 @@ others:
 - Uses [headcount](https://typst.app/universe/package/headcount) to make figure,
   table, and listing numbers dependent on Chapter number;
 - Includes built-in selective inclusion of indices: an index for figures,
-  tables, and listings is automatically added if needed and omitted if not;
-- Can generate a "For DiVA" JSON-based trailing section for compatibility with
-  existing, school-prevalent automation scripts; and
+  tables, and listings is automatically added if needed and omitted if not; and
 - Provides a simple interface and tuning options.
 
 ## Getting Started
@@ -39,16 +41,16 @@ others:
 Visit the template's [homepage](https://typst.app/universe/package/kthesis/) and
 click "Create project in app" to try it out in the Typst web app.
 
-Alternatively, you can also run `typst init @preview/kthesis` to bootstrap a new
+Alternatively, you can also run `typst init @preview/ntnu-thesis` to bootstrap a new
 project via the Typst CLI.
 
 ## Usage
 
-The main entrypoint is the function `kth-thesis`, which should be invoked with
+The main entrypoint is the function `ntnu-thesis`, which should be invoked with
 a `show` rule at the beginning of the document:
 
 ```typ
-#show: kth-thesis.with(primary-lang: "en")
+#show: ntnu-thesis.with(primary-lang: "en")
 ```
 
 Additional configuration options are passed as needed. After this rule has been
@@ -66,13 +68,13 @@ mark the subsequent sections as appendices and switch the numbering to letters:
 
 ## Configuration
 
-There are a number of options that can be passed to the `kth-thesis` function to
+There are a number of options that can be passed to the `ntnu-thesis` function to
 customize how the final document looks. All of them are optional since they come
 with default values, but in most cases you'll gradually end up having to set
 all of them to get the behavior you want. Here's a description of what is
 available:
 
-- `primary-lang`: Primary document language; either `en` or `sv`
+- `primary-lang`: Primary document language; either `en` or `no`
 - `localized-info`: Language-specific information, including title, subtitle,
   abstract, and keywords
 - `authors`: Information about who is conducting the degree project
@@ -80,13 +82,9 @@ available:
 - `examiner`: Information about who is evaluating the degree project
 - `course`: Degree project course of which this thesis is part
 - `degree`: Degree within the scope of which this project is being conducted
-- `national-subject-categories`: One or more mandatory classification codes,
-  from [SCB's list](https://www.scb.se/contentassets/10054f2ef27c437884e8cde0d38b9cc4/standard-for-svensk-indelning--av-forskningsamnen-2011-uppdaterad-aug-2016.pdf)
-- `school`: KTH institution hosting the project
-- `trita-number`: TRITA number assigned by the school upon project completion
+- `faculty`: NTNU faculty hosting the project
 - `host-company`: Company hosting the degree project, if any
 - `host-org`: Organization hosting the degree project, if any
-- `opponents`: Names of assigned opponents, if known
 - `presentation`: Final presentation details, if known
 - `cover-image`: Image to include on the front cover, if any
 - `acknowledgements`: Body of acknowledgements section
@@ -94,39 +92,19 @@ available:
 - `doc-date`: Document authoring/submission date
 - `doc-city`: Document city, for acknowledgments signature
 - `doc-extra-keywords`: Additional keywords for document metadata (but not text)
-- `with-for-diva`: Whether to include meta "For DiVA" section after back cover
 - `style`: Miscellaneous settings affecting the document's appearance
 
 Exact syntax and semantics for each option are shown in the starter `thesis.typ`
 main file provided by this template.
 
-**Note:** if `with-for-diva` is enabled, abstracts must use only very simple
-Typst constructs since content must be converted to HTML (which is a very lossy
-and naive process).
-
 ## Future Work
 
 Feature requests (via issues) and patch submissions (via PRs) are very welcome.
 
-Among others, in the future it might be nice to support:
-
-- G5 size paper (traditional for theses in Sweden), instead of just A4;
-- Alternative, shorter author names for acknowledgements signature;
-- Multiple degrees, including the "Same"/"Both" mechanism for similar or
-  distinct subject areas, respectively; and
-- Copyleft option, instead of just copyright;
-
 ## Conformance
 
-This template is unofficial and has not been verified to fully conform to KTH's
-requirements, therefore you should use it at your own risk. However, available
-information appears to imply that the covers are the only standardized part of
-the degree project report, with students having freedom to decide on all other
-formatting, styling, and layout aspects (if accepted by the Examiner).
-
-Covers (June 2024 version) have been replicated as best as possible in Typst
-from the provided DOTX templates, but future bids at refining fidelity may be
-attempted in the future, especially if and when LaTeX versions are published.
+This template is unofficial and has not been verified to fully conform to NTNU's
+requirements, therefore you should use it at your own risk.
 
 The covers use Arial, which is a proprietary font and may be difficult to get
 access to. This template will use Arial if it is available on the system at

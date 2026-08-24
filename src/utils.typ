@@ -85,7 +85,7 @@
   }
 
   // I don't really understand why this is the intended behavior either...
-  if lang == "sv" {
+  if lang == "no" {
     title + " - " + subtitle
   } else {
     title + ": " + subtitle

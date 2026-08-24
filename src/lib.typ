@@ -1,19 +1,17 @@
 #import "./covers.typ": *
 #import "./front-matter.typ": *
 #import "./styling-setup.typ": *
-#import "./for-diva.typ": for-diva-json
 #import "./utils.typ": (
-  assert-arg-type, extract-name, get-one-liner, maybe-sans-serif, z,
-  z-arbitrarily-keyed-dict, z-matches-regex,
+  assert-arg-type, extract-name, get-one-liner, maybe-sans-serif, z, z-arbitrarily-keyed-dict, z-matches-regex,
 )
 
-#let kth-thesis(
-  // Primary document language; either "en" or "sv"
+#let ntnu-thesis(
+  // Primary document language; either "en" or "no"
   primary-lang: "en",
   // Language-specific title, subtitle, abstract, and keywords.
-  // Grouped by language, with only values for "en" and "sv" being mandatory.
-  // Localized abstract/keywords headings may be omitted only for "en" and "sv".
-  // Field "alpha-3" is the language's ISO 639-3 code, for non-"en"/"sv" langs.
+  // Grouped by language, with only values for "en" and "no" being mandatory.
+  // Localized abstract/keywords headings may be omitted only for "en" and "no".
+  // Field "alpha-3" is the language's ISO 639-3 code, for non-"en"/"no" langs.
   // If desired, any "subtitle" field may be set to none (to omit it entirely).
   localized-info: (
     en: (
@@ -22,11 +20,11 @@
       abstract: lorem(300),
       keywords: ("Dogs", "Chicken nuggets"),
     ),
-    sv: (
-      title: "Svenska Översättningen av Titeln",
-      subtitle: "Svenska Översättningen av Undertiteln",
+    no: (
+      title: "Norsk oversettelse av tittelen",
+      subtitle: "Norsk oversettelse av undertittelen",
       abstract: lorem(300),
-      keywords: ("Hundar", "Kycklingnuggets"),
+      keywords: ("Hunder", "Kyllingnuggets"),
     ),
     pt: (
       alpha-3: "por",
@@ -45,7 +43,7 @@
       last-names: "Doe",
       email: "john.doe@example.com",
       user-id: "jod",
-      school: "School of Electrical Engineering and Computer Science",
+      faculty: "Faculty of Information Technology and Electrical Engineering",
       department: "Department of Typesetting Sanity",
     ),
     (
@@ -53,14 +51,14 @@
       last-names: "Doe",
     ),
   ),
-  // Ordered supervisor information; "external-org" replaces userid/school/dept
+  // Ordered supervisor information; "external-org" replaces userid/faculty/dept
   supervisors: (
     (
       first-name: "Alice",
       last-names: "Smith",
       email: "alice@example.com",
       user-id: "alice",
-      school: "School of Electrical Engineering and Computer Science",
+      faculty: "Faculty of Information Technology and Electrical Engineering",
       department: "Department of Loyal Supervision",
     ),
     (
@@ -76,7 +74,7 @@
     last-names: "Johnson",
     email: "charlie@example.com",
     user-id: "chj",
-    school: "School of Electrical Engineering and Computer Science",
+    faculty: "Faculty of Information Technology and Electrical Engineering",
     department: "Department of Fair Examination",
   ),
   // Degree project course within which the thesis is being conducted.
@@ -97,20 +95,12 @@
     kind: "Master of Science",
     cycle: 2,
   ),
-  // National subject category codes; mandatory for DiVA classification.
-  // One or more 3-to-5 digit codes, with preference for 5-digit codes, from:
-  // https://www.scb.se/contentassets/10054f2ef27c437884e8cde0d38b9cc4/standard-for-svensk-indelning--av-forskningsamnen-2011-uppdaterad-aug-2016.pdf
-  national-subject-categories: ("10201", "10206"),
-  // School that the thesis is part of (abbreviation)
-  school: "EECS",
-  // TRITA number assigned to thesis after final examiner approval
-  trita-number: "2026:0000",
+  // Faculty that the thesis is part of (abbreviation)
+  faculty: "EECS",
   // Host company collaborating for this thesis; may be none
   host-company: "Företag AB",
   // Host organization collaborating for this thesis; may be none
   host-org: none,
-  // Names of opponents for this thesis; may be none until they're assigned
-  opponents: ("Mary Ignatia", "Alexander Smith"),
   // Thesis presentation details; may be none until it's scheduled and set.
   // Either "online" or "location" fields may be none, but not both.
   presentation: (
@@ -151,8 +141,6 @@
   doc-city: "Stockholm",
   // Extra keywords, embedded in document metadata but not listed in text
   doc-extra-keywords: ("master thesis",),
-  // Whether to include trailing "For DiVA" metadata structure section
-  with-for-diva: true,
   // Miscellaneous settings affecting the document's appearance
   style: (:),
   // Document body
@@ -165,7 +153,7 @@
   // note that this is not necessarily exhaustive and is intended just as a
   // convenience, so that obvious problems surface immediately and clearly
 
-  assert-arg-type("primary-lang", primary-lang, z.choice(("en", "sv")))
+  assert-arg-type("primary-lang", primary-lang, z.choice(("en", "no")))
   assert-arg-type("localized-info", localized-info, z-arbitrarily-keyed-dict(
     "localized-info",
     z.string(assertions: (z.assert.length.equals(2),)),
@@ -181,7 +169,7 @@
       ),
     ),
     min: 1,
-    require-keys: ("en", "sv"),
+    require-keys: ("en", "no"),
   ))
   assert-arg-type("authors", authors, z.array(
     z.dictionary((
@@ -189,7 +177,7 @@
       last-names: z.string(min: 1),
       email: z.email(optional: true),
       user-id: z.string(optional: true, min: 1),
-      school: z.string(optional: true, min: 1),
+      faculty: z.string(optional: true, min: 1),
       department: z.string(optional: true, min: 1),
     )),
     min: 1,
@@ -199,7 +187,7 @@
     last-names: z.string(min: 1),
     email: z.email(),
     user-id: z.string(min: 1),
-    school: z.string(min: 1),
+    faculty: z.string(min: 1),
     department: z.string(min: 1),
   ))
   assert-arg-type("supervisors", supervisors, z.array(
@@ -223,40 +211,21 @@
     kind: z.string(min: 1),
     cycle: z.number(min: 1, max: 2), // better error messages than z.choice
   )))
-  assert-arg-type(
-    "national-subject-categories",
-    national-subject-categories,
-    z.array(
-      z.string(min: 3, max: 5, assertions: z-matches-regex(
-        "^\d+$",
-        "All characters must be digits",
-      )),
-      min: 1,
-    ),
-  )
-  assert-arg-type("school", school, z.choice((
+  assert-arg-type("faculty", faculty, z.choice((
     "ABE",
     "EECS",
     "ITM",
     "CBH",
     "SCI",
   )))
-  assert-arg-type("trita-number", trita-number, z.string(
-    assertions: z-matches-regex("\d{4}:\d+", "Must follow format `2026:0000`"),
-  ))
   assert-arg-type("host-company", host-company, z.string(
     optional: true,
     min: 1,
   ))
   assert-arg-type("host-org", host-org, z.string(optional: true, min: 1))
-  assert-arg-type("opponents", opponents, z.array(
-    z.string(min: 1),
-    optional: true,
-    min: 1,
-  ))
   assert-arg-type("presentation", presentation, z.dictionary(
     (
-      language: z.choice(("en", "sv")),
+      language: z.choice(("en", "no")),
       slot: z.date(),
       online: z.dictionary(
         (service: z.string(min: 1), link: z.string(min: 1)),
@@ -275,8 +244,7 @@
     assertions: (
       (
         condition: (_, it) => (
-          it.at("online", default: none) != none
-            or it.at("location", default: none) != none
+          it.at("online", default: none) != none or it.at("location", default: none) != none
         ),
         message: (_, it) => "Either \"online\" or \"location\" must be set",
       ),
@@ -297,7 +265,6 @@
   assert-arg-type("doc-extra-keywords", doc-extra-keywords, z.array(
     z.string(min: 1),
   ))
-  assert-arg-type("with-for-diva", with-for-diva, z.boolean())
   assert-arg-type("style", style, z.dictionary(
     (
       use-arial: z.boolean(optional: true),
@@ -319,8 +286,8 @@
   )
 
   let alt-lang = if primary-lang == "en" {
-    "sv"
-  } else if primary-lang == "sv" {
+    "no"
+  } else if primary-lang == "no" {
     "en"
   } else {
     panic("Invalid primary language " + primary-lang)
@@ -367,7 +334,7 @@
     authors: author-names,
     supervisors: supervisors.map(extract-name),
     examiner-name: extract-name(examiner),
-    examiner-school: examiner.at("school"),
+    examiner-faculty: examiner.at("faculty"),
     host-company: host-company,
     host-org: host-org,
   )
@@ -419,45 +386,12 @@
     styled-body(style, body)
   })
 
-  let trita-series = school + "-EX"
-
   [#metadata(()) <content-end>]
   pagebreak(to: "odd")
 
   page[] // empty
   back-cover(
-    trita-series: trita-series,
-    trita-number: trita-number,
     year: doc-date.year(),
     style,
   )
-
-  context if with-for-diva {
-    let page-series-counts = (
-      numbering("i", ..counter(page).at(<front-matter-end>)),
-      numbering("1", ..counter(page).at(<content-end>)),
-    )
-
-    page(
-      for-diva-json(
-        primary-lang: primary-lang,
-        alt-lang: alt-lang,
-        localized-info: localized-info,
-        authors: authors,
-        supervisors: supervisors,
-        examiner: examiner,
-        course: course,
-        degree: degree,
-        national-subject-categories: national-subject-categories,
-        trita-series: trita-series,
-        trita-number: trita-number,
-        host-company: host-company,
-        host-org: host-org,
-        opponents: opponents,
-        presentation: presentation,
-        doc-date: doc-date,
-        page-series-counts: page-series-counts,
-      ),
-    )
-  }
 }

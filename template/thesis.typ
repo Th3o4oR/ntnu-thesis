@@ -1,10 +1,8 @@
-#import "@preview/kthesis:0.1.8": kth-thesis, setup-appendices
+#import "@local/ntnu-thesis:0.1.8": ntnu-thesis, setup-appendices
 
 // The template is extensible and plays well with other dependencies;
 // For example, a table of acronyms can be generated using glossarium
-#import "@preview/glossarium:0.5.10": (
-  make-glossary, print-glossary, register-glossary,
-)
+#import "@preview/glossarium:0.5.10": make-glossary, print-glossary, register-glossary
 #import "./acronyms.typ": acronyms
 #show: make-glossary
 #register-glossary(acronyms)
@@ -16,13 +14,13 @@
 // --------------------------------------------------------------------- //
 // ---------- MAIN THESIS TEMPLATE ENTRYPOINT & CONFIGURATION ---------- //
 // --------------------------------------------------------------------- //
-#show: kth-thesis.with(
-  // Primary document language; either "en" or "sv"
+#show: ntnu-thesis.with(
+  // Primary document language; either "en" or "no"
   primary-lang: "en",
   // Language-specific title, subtitle, abstract, and keywords.
-  // Grouped by language, with only values for "en" and "sv" being mandatory.
-  // Localized abstract/keywords headings may be omitted only for "en" and "sv".
-  // Field "alpha-3" is the language's ISO 639-3 code, for non-"en"/"sv" langs.
+  // Grouped by language, with only values for "en" and "no" being mandatory.
+  // Localized abstract/keywords headings may be omitted only for "en" and "no".
+  // Field "alpha-3" is the language's ISO 639-3 code, for non-"en"/"no" langs.
   // If desired, any "subtitle" field may be set to none (to omit it entirely).
   localized-info: (
     en: (
@@ -31,11 +29,11 @@
       abstract: include "./content/abstract-1-en.typ",
       keywords: ("Dogs", "Chicken nuggets"),
     ),
-    sv: (
-      title: "Svenska Översättningen av Titeln",
-      subtitle: "Svenska Översättningen av Undertiteln",
-      abstract: include "./content/abstract-2-sv.typ",
-      keywords: ("Hundar", "Kycklingnuggets"),
+    no: (
+      title: "Hvordan fase ut typesettingsprogramvare fra dinosaurenes tid",
+      subtitle: "En moderne tilnærming til problemløsing",
+      abstract: lorem(300),
+      keywords: ("Hunder", "Kyllingnuggets"),
     ),
     pt: (
       alpha-3: "por",
@@ -54,7 +52,7 @@
       last-names: "Doe",
       email: "john.doe@example.com",
       user-id: "jod",
-      school: "School of Electrical Engineering and Computer Science",
+      faculty: "Faculty of Information Technology and Electrical Engineering",
       department: "Department of Typesetting Sanity",
     ),
     (
@@ -62,14 +60,14 @@
       last-names: "Doe",
     ),
   ),
-  // Ordered supervisor information; "external-org" replaces userid/school/dept
+  // Ordered supervisor information; "external-org" replaces userid/faculty/dept
   supervisors: (
     (
       first-name: "Alice",
       last-names: "Smith",
       email: "alice@example.com",
       user-id: "alice",
-      school: "School of Electrical Engineering and Computer Science",
+      faculty: "Faculty of Information Technology and Electrical Engineering",
       department: "Department of Loyal Supervision",
     ),
     (
@@ -79,13 +77,13 @@
       external-org: "Företag AB",
     ),
   ),
-  // Thesis examiner; must be internal to the school so all fields are mandatory
+  // Thesis examiner; must be internal to the faculty so all fields are mandatory
   examiner: (
     first-name: "Charlie",
     last-names: "Johnson",
     email: "charlie@example.com",
     user-id: "chj",
-    school: "School of Electrical Engineering and Computer Science",
+    faculty: "Faculty of Information Technology and Electrical Engineering",
     department: "Department of Fair Examination",
   ),
   // Degree project course within which the thesis is being conducted.
@@ -106,21 +104,12 @@
     kind: "Master of Science",
     cycle: 2,
   ),
-  // National subject category codes; mandatory for DiVA classification.
-  // One or more 3-to-5 digit codes, with preference for 5-digit codes, from:
-  // https://www.scb.se/dokumentation/klassifikationer-och-standarder/standard-for-svensk-indelning-av-forskningsamnen/
-  // ^ (select from that page the most recent PDF)
-  national-subject-categories: ("10201", "10206"),
-  // School that the thesis is part of (abbreviation)
-  school: "EECS",
-  // TRITA number assigned to thesis after final examiner approval
-  trita-number: "2026:0000",
+  // Faculty that the thesis is part of (abbreviation)
+  faculty: "EECS",
   // Host company collaborating for this thesis; may be none
   host-company: "Företag AB",
   // Host organization collaborating for this thesis; may be none
   host-org: none,
-  // Names of opponents for this thesis; may be none until they're assigned
-  opponents: ("Mary Ignatia", "Alexander Smith"),
   // Thesis presentation details; may be none until it's scheduled and set.
   // Either "online" or "location" fields may be none, but not both.
   presentation: (
@@ -156,11 +145,9 @@
   // Document date; hardcode for determinism/reproducibility
   doc-date: datetime.today(),
   // Document city (where it's being signed/authored/submitted)
-  doc-city: "Stockholm",
+  doc-city: "Trondheim",
   // Extra keywords, embedded in document metadata but not listed in text
   doc-extra-keywords: ("master thesis",),
-  // Whether to include trailing "For DiVA" metadata structure section
-  with-for-diva: true,
   // Miscellaneous settings affecting the document's appearance
   style: (
     // Whether the proprietary Arial font should be used in Sans-Serif contexts.
