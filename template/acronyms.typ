@@ -1,15 +1,15 @@
 #let acronyms = (
   (
-    key: "kth",
-    short: "KTH",
-    long: "KTH Royal Institute of Technology",
-    description: "A university in Stockholm",
+    key: "ntnu",
+    short: "NTNU",
+    long: "Norges teknisk-naturvitenskapelige universitet",
+    description: "Et statlig universitet i Norge",
   ),
   (
     key: "os",
     short: "OS",
-    plural: "OSes",
-    long: "Operating System",
-    longplural: "Operating Systems",
+    plural: "OSer",
+    long: "Operativsystem",
+    longplural: "Operativsystemer",
   ),
 )

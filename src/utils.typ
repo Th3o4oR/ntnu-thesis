@@ -23,7 +23,7 @@
 )
 
 #let assert-arg-type(name, value, schema) = {
-  let _ = z.parse(value, schema, scope: ("kthesis argument " + name,))
+  let _ = z.parse(value, schema, scope: ("ntnu-thesis argument " + name,))
 }
 
 #let z-arbitrarily-keyed-dict(
@@ -51,7 +51,7 @@
       assert.eq(
         type(it),
         dictionary,
-        message: "kthesis argument `" + name + "` must be a dictionary",
+        message: "ntnu-thesis argument `" + name + "` must be a dictionary",
       )
 
       it.pairs()
