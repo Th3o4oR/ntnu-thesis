@@ -16,7 +16,7 @@
 // --------------------------------------------------------------------- //
 #show: ntnu-thesis.with(
   // Primary document language; either "en" or "no"
-  primary-lang: "en",
+  primary-lang: "no",
   // Language-specific title, subtitle, abstract, and keywords.
   // Grouped by language, with only values for "en" and "no" being mandatory.
   // Localized abstract/keywords headings may be omitted only for "en" and "no".
@@ -30,8 +30,8 @@
       keywords: ("Dogs", "Chicken nuggets"),
     ),
     no: (
-      title: "Hvordan fase ut typesettingsprogramvare fra dinosaurenes tid",
-      subtitle: "En moderne tilnærming til problemløsing",
+      title: "Utfasing av typesettingssystemer fra dinosaurenes tid",
+      subtitle: "En moderne tilnærming til problemet",
       abstract: lorem(300),
       keywords: ("Hunder", "Kyllingnuggets"),
     ),
@@ -74,40 +74,22 @@
       first-name: "Bob",
       last-names: "Jones",
       email: "bob@example.com",
-      external-org: "Företag AB",
+      external-org: "Selskap AS",
     ),
   ),
-  // Thesis examiner; must be internal to the faculty so all fields are mandatory
-  examiner: (
-    first-name: "Charlie",
-    last-names: "Johnson",
-    email: "charlie@example.com",
-    user-id: "chj",
-    faculty: "Faculty of Information Technology and Electrical Engineering",
-    department: "Department of Fair Examination",
-  ),
-  // Degree project course within which the thesis is being conducted.
-  // All fields are mandatory; credits are the course's ECTS credits (hp).
-  course: (
-    code: "DA237X",
-    credits: 30,
-  ),
   // Degree as part of which the thesis is conducted; all fields are mandatory.
-  // Subject area is main field of study as listed in the second dropdown here:
-  // https://www.kth.se/en/student/studier/examen/examensregler-1.5685
   // Kind is the degree title conferred as listed in the third dropdown above.
   // Cycle is either 1 (Bachelor's) or 2 (Master's), per Bologna.
   degree: (
-    code: "TCYSM",
-    name: "Master's Program, Cybersecurity",
-    subject-area: "Computer Science and Engineering",
+    code: "MTTK",
+    name: "Kybernetikk og Robotikk",
     kind: "Master of Science",
     cycle: 2,
   ),
   // Faculty that the thesis is part of (abbreviation)
   faculty: "EECS",
   // Host company collaborating for this thesis; may be none
-  host-company: "Företag AB",
+  host-company: "Selskap AS",
   // Host organization collaborating for this thesis; may be none
   host-org: none,
   // Thesis presentation details; may be none until it's scheduled and set.

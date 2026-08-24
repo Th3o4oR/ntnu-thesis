@@ -1,86 +1,109 @@
-#import "./utils.typ": join-names, t
+#import "./utils.typ": join-names, maybe-sans-serif, months-no, t
 
 #let title-page(
-  title: "Primary Language Title Goes Here",
-  subtitle: "Primary Language Subtitle Goes Here", // may be none!
-  alt-title: "Alternative Language Title Goes Here",
-  alt-subtitle: "Alternative Language Subtitle Goes Here", // may be none!
-  alt-lang: "no", // either "en" or "no"
-  degree: "Master's Program, Computer Science",
-  date: datetime.today(),
+  title: "Example Title in Primary Language",
+  subtitle: "Example Subtitle in Primary Language",
   authors: ("Newt Yellow", "Bellatrix Green"),
   supervisors: ("Minerva Red", "Filius Blue"),
-  examiner-name: "Brian Gold",
-  examiner-faculty: "Department of Engineering Cybernetics",
-  host-company: "Selskap AS", // may be none!
-  host-org: "CERN", // may be none!
+  degree-name: "Example degree name",
+  faculty: "Example faculty",
+  department: "Example department",
+  cycle: 2,
+  date: datetime.today(),
+  lang: "en",
+  logo: image("../assets/NTNU_logo_liggende_med_visjon.svg", width: 45mm),
+  style,
 ) = page(
-  margin: (top: 65mm, bottom: 30mm, left: 74pt, right: 35mm),
+  margin: (top: 27mm, bottom: 30mm, inside: 35mm, outside: 25mm),
   {
-    text(size: 25pt, strong(title))
+    set align(left)
+    set text(size: 10pt, font: maybe-sans-serif(style))
 
-    if subtitle != none {
-      v(10pt)
-
-      text(size: 18pt, subtitle)
+    // --- Author, title, subtitle (optional) ---
+    let author-text = text(
+      size: 16pt,
+      fill: rgb("#555555"),
+      authors.join(", "),
+    )
+    let title-text = text(
+      size: 22pt,
+      weight: "bold",
+      title,
+    )
+    let subtitle-text = if subtitle != none {
+      text(size: 13pt, subtitle)
     }
 
-    v(10mm)
+    [
+      #author-text
 
-    for author in authors {
-      text(size: 14pt, upper(author))
-      linebreak()
-    }
+      #title-text
+
+      #subtitle-text
+    ]
 
     v(1fr)
 
-    [
-      *#degree* \
-      *#t("date"):* #date.display("[month repr:long] [day], [year]")
-    ]
+    // Necessary as of 2026-08-24 because datetime.display doesn't automatically translate based on the text language.
+    // See: https://github.com/typst/typst/issues/2840
+    // And: https://github.com/typst/typst/issues/1537
+    let formatted-date = if lang == "en" [
+      #date.display("[month repr:long] [year]")
+    ] else {
+      let translated-month(dt) = months-no.at(dt.month() - 1)
+      [#translated-month(date) #date.year()]
+    }
 
-    v(5mm)
+    let thesis-type = if cycle == 1 {
+      t("bachelors-thesis")
+    } else {
+      t("masters-thesis")
+    }
 
-    let super-label = if supervisors.len() == 1 {
+    let supervisor-label = if supervisors.len() == 1 {
       t("supervisor")
     } else {
       t("supervisors")
     }
 
     [
-      *#super-label:* #join-names(supervisors) \
-      *#t("examiner"):* #examiner-name \
-      #hide[*#t("examiner"):*] #emph(examiner-faculty) \
+      #thesis-type #t("in") #degree-name \
+      #if supervisors != () and supervisors != none [
+        #supervisor-label: #supervisors.join(", ") \
+      ]
+      #formatted-date
+
+      \
+
+      #t("uni-long") \
+      #if faculty != none [ #faculty \ ]
+      #if department != none [ #department \ ]
     ]
 
-    if host-company != none {
-      [*#t("host-company"):* #host-company]
-      linebreak()
-    }
+    v(2.5em)
 
-    if host-org != none {
-      [*#t("host-org"):* #host-org]
-      linebreak()
+    // --- NTNU Logo ---
+    if logo != none {
+      logo
+    } else {
+      image("../assets/ntnu_logo.svg", width: 44mm)
     }
-
-    [
-      *#t("alt-title"):* #text(lang: alt-lang, alt-title) \
-      #if alt-subtitle != none {
-        [*#t("alt-subtitle"):* #text(lang: alt-lang, alt-subtitle)]
-      }
-    ]
   },
 )
 
 #let copyright-page(
   year: 2026,
   authors: ("Astronaut Boulder", "Cat Dog"),
+  publisher: "NTNU",
 ) = page(
-  margin: (top: 250mm, bottom: 30mm, left: 74pt, right: 35mm),
+  margin: (top: 27mm, bottom: 30mm, inside: 35mm, outside: 25mm),
   {
     v(1fr)
-
-    [#sym.copyright #year #sym.space.quad #join-names(authors)]
+    set text(size: 9pt, fill: rgb("#555555"))
+    [
+      #sym.copyright #year #if type(authors) == array { authors.join(", ") } else { authors } \
+      #publisher
+    ]
   },
 )
 
@@ -101,31 +124,35 @@
 
   set text(lang: lang)
 
-  // explicit lang is necessary for it to be shown correctly in header,
-  // since it's extracted without the above set rule's effects and so
-  // would otherwise be displayed in the document's primary language
   heading(outlined: false, depth: 1, text(lang: lang, abstract-heading))
 
   body
 
-  heading(outlined: false, depth: 2, keywords-heading)
-
-  keywords.join(", ")
+  if keywords.len() > 0 [
+    #v(1.5em)
+    #strong(keywords-heading): #keywords.join(", ")
+  ]
 }
 
 #let signed-acknowledgements(
-  city: "Stockholm",
-  date: datetime.today,
+  city: "Trondheim",
+  date: datetime.today(),
   authors: ("Gary Lose", "Harriet Lung"),
   body,
 ) = {
-  heading(outlined: false, depth: 1, t("ack-heading"))
+  heading(outlined: false, depth: 1, "Preface")
 
   body
 
-  v(5pt)
+  v(1.5em)
 
-  [#city, #date.display("[month repr:long] [year]")]
+  let formatted-date = if type(date) == datetime {
+    date.display("[month repr:long] [year]")
+  } else {
+    str(date)
+  }
+
+  [#city, #formatted-date]
   for author in authors {
     linebreak()
     author

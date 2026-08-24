@@ -8,6 +8,21 @@
 
 #let t = key => linguify(key, from: lang-db)
 
+#let months-no = (
+  "Januar",
+  "Februar",
+  "Mars",
+  "April",
+  "Mai",
+  "Juni",
+  "Juli",
+  "August",
+  "September",
+  "Oktober",
+  "November",
+  "Desember",
+)
+
 #let assert-arg-type(name, value, schema) = {
   let _ = z.parse(value, schema, scope: ("kthesis argument " + name,))
 }

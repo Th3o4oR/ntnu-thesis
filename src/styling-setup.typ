@@ -20,7 +20,7 @@
 #let global-setup(style, body) = context {
   set page(
     // I don't like these numbers, especially the bottom margin...
-    margin: (top: 37mm, bottom: 50mm, inside: 45mm, outside: 35mm),
+    margin: (top: 27mm, bottom: 30mm, inside: 35mm, outside: 25mm),
     header-ascent: 15mm + 6mm,
     footer-descent: 25mm,
     header: header(style),

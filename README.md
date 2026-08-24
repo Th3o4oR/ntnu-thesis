@@ -79,8 +79,6 @@ available:
   abstract, and keywords
 - `authors`: Information about who is conducting the degree project
 - `supervisors`: Information about who is supervising the degree project
-- `examiner`: Information about who is evaluating the degree project
-- `course`: Degree project course of which this thesis is part
 - `degree`: Degree within the scope of which this project is being conducted
 - `faculty`: NTNU faculty hosting the project
 - `host-company`: Company hosting the degree project, if any

@@ -15,8 +15,8 @@
   // If desired, any "subtitle" field may be set to none (to omit it entirely).
   localized-info: (
     en: (
-      title: "How to Abandon Dinosaur-Age TypeSetting Software",
-      subtitle: "A Modern Approach to Problem-Solving",
+      title: "English title",
+      subtitle: "English subtitle",
       abstract: lorem(300),
       keywords: ("Dogs", "Chicken nuggets"),
     ),
@@ -65,23 +65,8 @@
       first-name: "Bob",
       last-names: "Jones",
       email: "bob@example.com",
-      external-org: "Företag AB",
+      external-org: "Selskap AS",
     ),
-  ),
-  // Thesis examiner; must be internal to the school so all fields are mandatory
-  examiner: (
-    first-name: "Charlie",
-    last-names: "Johnson",
-    email: "charlie@example.com",
-    user-id: "chj",
-    faculty: "Faculty of Information Technology and Electrical Engineering",
-    department: "Department of Fair Examination",
-  ),
-  // Degree project course within which the thesis is being conducted.
-  // All fields are mandatory; credits are the course's ECTS credits (hp).
-  course: (
-    code: "DA237X",
-    credits: 30,
   ),
   // Degree as part of which the thesis is conducted; all fields are mandatory.
   // Subject area is main field of study as listed in the second dropdown here:
@@ -91,14 +76,13 @@
   degree: (
     code: "TCYSM",
     name: "Master's Program, Cybersecurity",
-    subject-area: "Computer Science and Engineering",
     kind: "Master of Science",
     cycle: 2,
   ),
   // Faculty that the thesis is part of (abbreviation)
   faculty: "EECS",
   // Host company collaborating for this thesis; may be none
-  host-company: "Företag AB",
+  host-company: "Selskap AS",
   // Host organization collaborating for this thesis; may be none
   host-org: none,
   // Thesis presentation details; may be none until it's scheduled and set.
@@ -138,7 +122,7 @@
   // Document date; hardcode for determinism/reproducibility
   doc-date: datetime.today(),
   // Document city (where it's being signed/authored/submitted)
-  doc-city: "Stockholm",
+  doc-city: "Trondheim",
   // Extra keywords, embedded in document metadata but not listed in text
   doc-extra-keywords: ("master thesis",),
   // Miscellaneous settings affecting the document's appearance
@@ -199,15 +183,9 @@
     ))),
     min: 1,
   ))
-  assert-arg-type("examiner", examiner, internal-person)
-  assert-arg-type("course", course, z.dictionary((
-    code: z.string(min: 1),
-    credits: z.number(min: 1),
-  )))
   assert-arg-type("degree", degree, z.dictionary((
     code: z.string(min: 1),
     name: z.string(min: 1),
-    subject-area: z.string(min: 1),
     kind: z.string(min: 1),
     cycle: z.number(min: 1, max: 2), // better error messages than z.choice
   )))
@@ -297,6 +275,7 @@
   let alt-info = localized-info.at(alt-lang)
 
   let author-names = authors.map(extract-name)
+  let supervisor-names = supervisors.map(extract-name)
 
   set document(
     title: get-one-liner(primary-lang, primary-info),
@@ -309,13 +288,16 @@
   set text(lang: primary-lang, size: 12pt)
 
   front-cover(
-    title: primary-info.at("title"),
+    title: primary-info.title,
     subtitle: primary-info.at("subtitle", default: none),
     authors: author-names,
-    subject-area: degree.at("subject-area"),
-    cycle: degree.at("cycle"),
-    credits: course.at("credits"),
-    cover-image: cover-image,
+    supervisors: supervisor-names,
+    degree-name: degree.name,
+    faculty: authors.at(0).faculty,
+    department: authors.at(0).department,
+    cycle: degree.cycle,
+    date: doc-date,
+    lang: primary-lang,
     style,
   )
 
@@ -324,19 +306,17 @@
   set text(font: maybe-sans-serif(style))
 
   title-page(
-    title: primary-info.at("title"),
+    title: primary-info.title,
     subtitle: primary-info.at("subtitle", default: none),
-    alt-title: alt-info.at("title"),
-    alt-subtitle: alt-info.at("subtitle", default: none),
-    alt-lang: alt-lang,
-    degree: degree.at("name"),
-    date: doc-date,
     authors: author-names,
-    supervisors: supervisors.map(extract-name),
-    examiner-name: extract-name(examiner),
-    examiner-faculty: examiner.at("faculty"),
-    host-company: host-company,
-    host-org: host-org,
+    supervisors: supervisor-names,
+    degree-name: degree.name,
+    faculty: authors.at(0).faculty,
+    department: authors.at(0).department,
+    cycle: degree.cycle,
+    date: doc-date,
+    lang: primary-lang,
+    style,
   )
 
   copyright-page(year: doc-date.year(), authors: author-names)
