@@ -83,7 +83,6 @@ available:
 - `faculty`: NTNU faculty hosting the project
 - `host-company`: Company hosting the degree project, if any
 - `host-org`: Organization hosting the degree project, if any
-- `presentation`: Final presentation details, if known
 - `cover-image`: Image to include on the front cover, if any
 - `acknowledgements`: Body of acknowledgements section
 - `extra-preambles`: Additional, arbitrary front-matter sections, if needed

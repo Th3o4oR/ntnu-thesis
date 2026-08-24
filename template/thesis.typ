@@ -92,25 +92,6 @@
   host-company: "Selskap AS",
   // Host organization collaborating for this thesis; may be none
   host-org: none,
-  // Thesis presentation details; may be none until it's scheduled and set.
-  // Either "online" or "location" fields may be none, but not both.
-  presentation: (
-    language: "en",
-    slot: datetime(
-      year: 2026,
-      month: 6,
-      day: 14,
-      hour: 13,
-      minute: 0,
-      second: 0,
-    ),
-    online: (service: "Zoom", link: "https://kth-se.zoom.us/j/111222333"),
-    location: (
-      room: "F1 (Alfvénsalen)",
-      address: "Lindstedtsvägen 22",
-      city: "Stockholm",
-    ),
-  ),
   // Optional image to show on the front cover.
   // This should either be none, or an "image" element. For example,
   // cover-image: image("./assets/cover.png", width: 100%)

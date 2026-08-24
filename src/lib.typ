@@ -69,8 +69,6 @@
     ),
   ),
   // Degree as part of which the thesis is conducted; all fields are mandatory.
-  // Subject area is main field of study as listed in the second dropdown here:
-  // https://www.kth.se/en/student/studier/examen/examensregler-1.5685
   // Kind is the degree title conferred as listed in the third dropdown above.
   // Cycle is either 1 (Bachelor's) or 2 (Master's), per Bologna.
   degree: (
@@ -85,25 +83,6 @@
   host-company: "Selskap AS",
   // Host organization collaborating for this thesis; may be none
   host-org: none,
-  // Thesis presentation details; may be none until it's scheduled and set.
-  // Either "online" or "location" fields may be none, but not both.
-  presentation: (
-    language: "en",
-    slot: datetime(
-      year: 2026,
-      month: 6,
-      day: 14,
-      hour: 13,
-      minute: 0,
-      second: 0,
-    ),
-    online: (service: "Zoom", link: "https://kth-se.zoom.us/j/111222333"),
-    location: (
-      room: "F1 (Alfvénsalen)",
-      address: "Lindstedtsvägen 22",
-      city: "Stockholm",
-    ),
-  ),
   // Optional image to show on the front cover.
   // This should either be none, or an "image" element. For example,
   // cover-image: image("./assets/cover.png", width: 100%)
@@ -201,33 +180,6 @@
     min: 1,
   ))
   assert-arg-type("host-org", host-org, z.string(optional: true, min: 1))
-  assert-arg-type("presentation", presentation, z.dictionary(
-    (
-      language: z.choice(("en", "no")),
-      slot: z.date(),
-      online: z.dictionary(
-        (service: z.string(min: 1), link: z.string(min: 1)),
-        optional: true,
-      ),
-      location: z.dictionary(
-        (
-          room: z.string(min: 1),
-          address: z.string(min: 1),
-          city: z.string(min: 1),
-        ),
-        optional: true,
-      ),
-    ),
-    optional: true,
-    assertions: (
-      (
-        condition: (_, it) => (
-          it.at("online", default: none) != none or it.at("location", default: none) != none
-        ),
-        message: (_, it) => "Either \"online\" or \"location\" must be set",
-      ),
-    ),
-  ))
   assert-arg-type("cover-image", cover-image, z.content(optional: true))
   assert-arg-type(
     "acknowledgements",
