@@ -79,10 +79,6 @@
   ),
   // Faculty that the thesis is part of (abbreviation)
   faculty: "EECS",
-  // Host company collaborating for this thesis; may be none
-  host-company: "Selskap AS",
-  // Host organization collaborating for this thesis; may be none
-  host-org: none,
   // Optional image to show on the front cover.
   // This should either be none, or an "image" element. For example,
   // cover-image: image("./assets/cover.png", width: 100%)
@@ -175,11 +171,6 @@
     "CBH",
     "SCI",
   )))
-  assert-arg-type("host-company", host-company, z.string(
-    optional: true,
-    min: 1,
-  ))
-  assert-arg-type("host-org", host-org, z.string(optional: true, min: 1))
   assert-arg-type("cover-image", cover-image, z.content(optional: true))
   assert-arg-type(
     "acknowledgements",

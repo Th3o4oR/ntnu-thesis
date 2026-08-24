@@ -81,8 +81,6 @@ available:
 - `supervisors`: Information about who is supervising the degree project
 - `degree`: Degree within the scope of which this project is being conducted
 - `faculty`: NTNU faculty hosting the project
-- `host-company`: Company hosting the degree project, if any
-- `host-org`: Organization hosting the degree project, if any
 - `cover-image`: Image to include on the front cover, if any
 - `acknowledgements`: Body of acknowledgements section
 - `extra-preambles`: Additional, arbitrary front-matter sections, if needed
