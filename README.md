@@ -38,7 +38,7 @@ others:
 
 ## Getting Started
 
-Visit the template's [homepage](https://typst.app/universe/package/kthesis/) and
+Visit the template's [homepage](https://typst.app/universe/package/ntnu-thesis/) and
 click "Create project in app" to try it out in the Typst web app.
 
 Alternatively, you can also run `typst init @preview/ntnu-thesis` to bootstrap a new
