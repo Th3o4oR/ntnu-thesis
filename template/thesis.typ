@@ -1,4 +1,4 @@
-#import "@local/ntnu-thesis:0.1.8": ntnu-thesis, setup-appendices
+#import "@preview/ntnu-thesis:0.2.0": ntnu-thesis, setup-appendices
 
 // The template is extensible and plays well with other dependencies;
 // For example, a table of acronyms can be generated using glossarium

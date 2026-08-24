@@ -1,4 +1,3 @@
 release-to.sh
 .releaseignore
-.envrc
 .gitignore

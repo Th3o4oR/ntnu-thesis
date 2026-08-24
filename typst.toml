@@ -1,6 +1,6 @@
 [package]
 name = "ntnu-thesis"
-version = "0.1.8"
+version = "0.2.0"
 entrypoint = "src/lib.typ"
 authors = ["Theodor Johansson", "Rafael Oliveira <@RafDevX>"]
 license = "MIT AND MIT-0"
@@ -14,7 +14,7 @@ keywords = [
     "thesis",
 ]
 compiler = "0.15.0"
-exclude = [".gitignore", "*.sh", "shell.nix", ".envrc"]
+exclude = [".gitignore", "*.sh"]
 
 [template]
 path = "template"
