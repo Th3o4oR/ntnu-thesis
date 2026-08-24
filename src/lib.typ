@@ -86,6 +86,9 @@
   // (especially its height, width, and fit mode). However, the recommended
   // styles are (width: 100%) or (width: 16cm, height: 10cm, fit: "contain").
   cover-image: none,
+  // Colour of rectangle to be used on the front cover.
+  // Should either be none, or a "color" element.
+  cover-color: none,
   // Acknowledgements body
   acknowledgements: {
     par(lorem(100))
@@ -241,6 +244,8 @@
     cycle: degree.cycle,
     date: doc-date,
     lang: primary-lang,
+    ..if cover-image != none { (logo: cover-image) } else { (:) },
+    ..if cover-color != none { (bar-color: cover-color) } else { (:) },
     style,
   )
 
