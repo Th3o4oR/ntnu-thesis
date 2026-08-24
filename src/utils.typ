@@ -1,8 +1,7 @@
 #import "@preview/linguify:0.5.0": linguify
 #import "@preview/valkyrie:0.2.2" as z
 
-#let kth-blue = rgb("#004791")
-#let kth-navy = rgb("#000061")
+#let ntnu-blue = rgb("#00509e")
 
 #let lang-db = toml("./lang.toml")
 

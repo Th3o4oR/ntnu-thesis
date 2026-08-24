@@ -1,4 +1,4 @@
-#import "./utils.typ": kth-blue, maybe-sans-serif, t
+#import "./utils.typ": maybe-sans-serif, ntnu-blue, t
 
 #import "@preview/headcount:0.1.1": dependent-numbering
 #import "@preview/hydra:0.6.3": hydra
@@ -98,8 +98,8 @@
   show link: it => if type(it.dest) == str {
     // only affect external links, not e.g. glossary refs
     underline(
-      stroke: 1pt + kth-blue,
-      text(fill: kth-blue, it),
+      stroke: 1pt + ntnu-blue,
+      text(fill: ntnu-blue, it),
     )
   } else {
     it
