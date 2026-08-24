@@ -79,7 +79,7 @@
     // I don't know why they want an en-dash here...
     [
       #set text(size: 8pt)
-      #t("stockholm-sweden") #year \
+      #t("trondheim-norway") #year \
       #link("https://www.ntnu.no/", "www.ntnu.no")
     ]
   },
