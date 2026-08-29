@@ -16,16 +16,16 @@
   // If desired, any "subtitle" field may be set to none (to omit it entirely).
   localized-info: (
     en: (
-      title: "English title",
-      subtitle: "English subtitle",
+      title: "Hoping Nobody Hacks You",
+      subtitle: "Security by optimism and prayer",
       abstract: lorem(300),
-      keywords: ("Dogs", "Chicken nuggets"),
+      keywords: ("Ctrl+C", "Ctrl+V", "Imposter Syndrome"),
     ),
     no: (
-      title: "Norsk oversettelse av tittelen",
-      subtitle: "Norsk oversettelse av undertittelen",
+      title: "Hvordan Skrive Ubrukelige Commit-Meldinger",
+      subtitle: "git commit -m 'endringer'",
       abstract: lorem(300),
-      keywords: ("Hunder", "Kyllingnuggets"),
+      keywords: ("Ctrl+C", "Ctrl+V", "Imposter Syndrome"),
     ),
   ),
   // Ordered author information; only first and last names fields are mandatory
@@ -35,8 +35,8 @@
       last-names: "Doe",
       email: "john.doe@example.com",
       user-id: "jod",
-      faculty: "Faculty of Information Technology and Electrical Engineering",
-      department: "Department of Typesetting Sanity",
+      faculty: "Faculty of Educated Guesses",
+      department: "Department of Applied Guesswork",
     ),
     (
       first-name: "Jane",
@@ -50,7 +50,7 @@
       last-names: "Smith",
       email: "alice@example.com",
       user-id: "alice",
-      faculty: "Faculty of Information Technology and Electrical Engineering",
+      faculty: "Faculty of Impossible Expectations",
       department: "Department of Loyal Supervision",
     ),
     (
@@ -64,13 +64,15 @@
   // Kind is the degree title conferred as listed in the third dropdown above.
   // Level is either "project", "bachelor", "master" or "phd"
   degree: (
-    code: "TCYSM",
-    name: "Master's Program, Cybersecurity",
-    kind: "Master of Science",
+    code: "MTEG",
+    name: "Master's Program, Educated Guesses",
+    kind: "Master of Unapplied Sciences",
     level: "master",
   ),
-  // Faculty that the thesis is part of (abbreviation)
-  faculty: "EECS",
+  // Faculty that the thesis is part of
+  faculty: "Faculty of Turning It Off and On Again",
+  // Department that the thesis is part of
+  department: "Department of Loyal Supervision",
   // Information about the cover page for the thesis
   cover: (
     // Whether to generate a cover page at all. Note that for the official submission,
@@ -163,13 +165,8 @@
     kind: z.string(min: 1),
     level: z.choice(thesis-type-keys.keys()),
   )))
-  assert-arg-type("faculty", faculty, z.choice((
-    "ABE",
-    "EECS",
-    "ITM",
-    "CBH",
-    "SCI",
-  )))
+  assert-arg-type("faculty", faculty, z.string(min: 1))
+  assert-arg-type("department", department, z.string(min: 1))
   assert-arg-type("cover", cover, z.dictionary((
     enable: z.boolean(),
     color: z.color(),
@@ -240,8 +237,8 @@
       authors: author-names,
       supervisors: supervisor-names,
       degree-name: degree.name,
-      faculty: authors.at(0).faculty,
-      department: authors.at(0).department,
+      faculty: faculty,
+      department: department,
       level: degree.level,
       date: doc-date,
       lang: primary-lang,
@@ -260,8 +257,8 @@
     authors: author-names,
     supervisors: supervisor-names,
     degree-name: degree.name,
-    faculty: authors.at(0).faculty,
-    department: authors.at(0).department,
+    faculty: faculty,
+    department: department,
     level: degree.level,
     date: doc-date,
     lang: primary-lang,

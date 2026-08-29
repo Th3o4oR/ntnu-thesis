@@ -34,13 +34,13 @@
       title: "How to Abandon Dinosaur-Age TypeSetting Software",
       subtitle: "A Modern Approach to Problem-Solving",
       abstract: include "./content/abstract-1-en.typ",
-      keywords: ("Dogs", "Chicken nuggets"),
+      keywords: ("Overfull \\hbox", "Missing $ inserted", "Compilation timed out"),
     ),
     no: (
       title: "Utfasing av typesettingssystemer fra dinosaurenes tid",
       subtitle: "En moderne tilnærming til problemet",
       abstract: lorem(300),
-      keywords: ("Hunder", "Kyllingnuggets"),
+      keywords: ("Forsvunne figurer", "Bærekraftig formatering"),
     ),
   ),
   // Ordered author information; only first and last names fields are mandatory
@@ -50,8 +50,8 @@
       last-names: "Doe",
       email: "john.doe@example.com",
       user-id: "jod",
-      faculty: "Faculty of Information Technology and Electrical Engineering",
-      department: "Department of Typesetting Sanity",
+      faculty: "Faculty of Educated Guesses",
+      department: "Department of Applied Guesswork",
     ),
     (
       first-name: "Jane",
@@ -65,7 +65,7 @@
       last-names: "Smith",
       email: "alice@example.com",
       user-id: "alice",
-      faculty: "Faculty of Information Technology and Electrical Engineering",
+      faculty: "Faculty of Impossible Expectations",
       department: "Department of Loyal Supervision",
     ),
     (
@@ -79,13 +79,15 @@
   // Kind is the degree title conferred as listed in the third dropdown above.
   // Level is either "project", "bachelor", "master" or "phd"
   degree: (
-    code: "MTTK",
-    name: "Kybernetikk og Robotikk",
-    kind: "Master of Science",
+    code: "MTFORMAT",
+    name: "Applied Guesswork and Formatting Adjustments",
+    kind: "Master of Unapplied Sciences",
     level: "master",
   ),
-  // Faculty that the thesis is part of (abbreviation)
-  faculty: "EECS",
+  // Faculty that the thesis is part of
+  faculty: "Faculty of Fast Compilation Times",
+  // Department that the thesis is part of
+  department: "Department of Typesetting Sanity",
   // Information about the cover page for the thesis
   cover: (
     // Whether to generate a cover page at all. Note that for the official submission,
