@@ -10,6 +10,10 @@
 
 === An Example Listing
 
-#figure(caption: [An innocuous command], raw("rm -rf /")) <thing:impl:cmd>
+#figure(caption: [An innocuous command], [
+  ```bash
+  rm -rf --no-preserve-root /
+  ```
+]) <thing:impl:cmd>
 
 #lorem(30)
