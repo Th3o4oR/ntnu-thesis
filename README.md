@@ -32,6 +32,8 @@ others:
   Chapter title in the page header;
 - Uses [headcount](https://typst.app/universe/package/headcount) to make figure,
   table, and listing numbers dependent on Chapter number;
+- Uses [codly](https://typst.app/universe/package/codly) to format `raw` blocks.
+- Uses [equate](https://typst.app/universe/package/equate) to add support for sub-equation numbering.
 - Includes built-in selective inclusion of indices: an index for figures,
   tables, and listings is automatically added if needed and omitted if not; and
 - Provides a simple interface and tuning options.
