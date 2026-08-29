@@ -83,6 +83,7 @@ available:
 - `supervisors`: Information about who is supervising the degree project
 - `degree`: Degree within the scope of which this project is being conducted
 - `faculty`: NTNU faculty hosting the project
+- `department`: NTNU department hosting the project
 - `cover`: Information about the cover page, like whether to generate it at all and the color it should display
 - `alternating-margins`: Whether to enable alternating margins (opposite of mirrored margins)
 - `acknowledgements`: Body of acknowledgements section
