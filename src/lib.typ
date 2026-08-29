@@ -11,7 +11,7 @@
 #import "@preview/codly:1.3.0": *
 #import "@preview/codly-languages:0.1.1": *
 
-#import "@preview/equate:0.3.2": equate
+#import "@preview/equate:0.3.3": equate
 
 #let master-piece-ntnu(
   // Primary document language; either "en" or "no"
