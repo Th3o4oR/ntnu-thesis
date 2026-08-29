@@ -27,10 +27,22 @@
   align(center, number)
 }
 
-#let global-setup(style, body) = context {
+#let global-setup(style, alternating-margins, body) = context {
+  let margins = if alternating-margins {
+    (
+      inside: 35mm,
+      outside: 25mm,
+    )
+  } else {
+    (
+      inside: 30mm,
+      outside: 30mm,
+    )
+  }
+
   set page(
     // I don't like these numbers, especially the bottom margin...
-    margin: (top: 30mm, bottom: 30mm, inside: 35mm, outside: 25mm),
+    margin: (top: 30mm, bottom: 30mm, inside: margins.inside, outside: margins.outside),
     header-ascent: 10mm,
     footer-descent: 10mm,
     header: header(style),

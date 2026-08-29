@@ -89,6 +89,10 @@
     // Colour of rectangle to be used on the front cover.
     color: rgb("#8DA7CF"),
   ),
+  // Different margins for alternating pages. Adds extra margins to the inside-side of
+  // each page, which helps keep all text legible when binding the thesis like a book,
+  // but can look weird when presented as a PDF on a screen.
+  alternating-margins: true,
   // Acknowledgements body
   acknowledgements: include "content/acknowledgements.typ",
   // Additional front-matter sections, each with keys "heading" and "body"

@@ -81,6 +81,10 @@
     // Should either be none, or a "color" element.
     color: rgb("#8DA7CF"),
   ),
+  // Different margins for alternating pages. Adds extra margins to the inside-side of
+  // each page, which helps keep all text legible when binding the thesis like a book,
+  // but can look weird when presented as a PDF on a screen.
+  alternating-margins: true,
   // Acknowledgements body
   acknowledgements: {
     par(lorem(100))
@@ -266,7 +270,7 @@
 
   copyright-page(year: doc-date.year(), authors: author-names)
 
-  global-setup(style, {
+  global-setup(style, alternating-margins, {
     set page(numbering: "i")
     counter(page).update(1)
 
