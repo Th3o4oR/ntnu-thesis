@@ -80,15 +80,15 @@
   ),
   // Faculty that the thesis is part of (abbreviation)
   faculty: "EECS",
-  // Optional image to show on the front cover.
-  // This should either be missing, or an "image" element. For example,
-  // cover-image: image("./assets/cover.png", width: 100%)
-  // If provided, the image can be formatted arbitrarily to look however desired
-  // (especially its height, width, and fit mode). However, the recommended
-  // styles are (width: 100%) or (width: 16cm, height: 10cm, fit: "contain").
-  cover-image: none,
-  // Optional colour override for the front of the cover.
-  cover-color: none,
+  // Information about the cover page for the thesis
+  cover: (
+    // Whether to generate a cover page at all. Note that for the official submission,
+    // NTNU will automatically generate a cover page, so this should probably be disabled
+    // before submitting.
+    enable: true,
+    // Colour of rectangle to be used on the front cover.
+    color: rgb("#8DA7CF"),
+  ),
   // Acknowledgements body
   acknowledgements: include "content/acknowledgements.typ",
   // Additional front-matter sections, each with keys "heading" and "body"

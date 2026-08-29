@@ -9,6 +9,8 @@
 
 #let bar-stroke(bar-color) = bar-color.lighten(40%)
 
+#let logo = image("../assets/NTNU_logo_liggende_med_visjon.svg", width: 45mm)
+
 #let front-cover(
   title: "Example Title in Primary Language",
   subtitle: "Example Subtitle in Primary Language",
@@ -20,8 +22,7 @@
   level: "master",
   date: datetime.today(),
   lang: "en",
-  bar-color: rgb("#8DA7CF"),
-  logo: image("../assets/NTNU_logo_liggende_med_visjon.svg", width: 45mm),
+  cover-color: rgb("#8DA7CF"),
   style,
 ) = {
   set page(margin: (left: left-margin, right: 30mm, top: 40mm, bottom: 25mm))
@@ -37,7 +38,7 @@
     rect(
       width: bar-width,
       height: bar-height,
-      fill: bar-color,
+      fill: cover-color,
       inset: bar-inset,
       align(right + bottom, rotate(-90deg, reflow: true)[
         #text(size: 15pt, weight: "bold", fill: rgb("#000000"), thesis-type)
@@ -72,7 +73,7 @@
       tip: stealth,
       start: (0mm, 0mm),
       end: (left-margin - bar-width / 3, 0mm),
-      stroke: 1pt + bar-stroke(bar-color),
+      stroke: 1pt + bar-stroke(cover-color),
     ),
   )
 
@@ -134,8 +135,7 @@
 
 #let back-cover(
   year: 2026,
-  bar-color: rgb("#8DA7CF"),
-  logo: image("../assets/NTNU_logo_liggende_med_visjon.svg", width: 45mm),
+  cover-color: rgb("#8DA7CF"),
   style,
 ) = {
   // Margins matched to front-cover to ensure accurate physical alignment
@@ -153,7 +153,7 @@
     rect(
       width: 100% + 30mm,
       height: bar-height,
-      fill: bar-color,
+      fill: cover-color,
     ),
   )
 
@@ -164,7 +164,7 @@
     dy: cy - r,
     circle(
       radius: r,
-      stroke: 1pt + bar-stroke(bar-color),
+      stroke: 1pt + bar-stroke(cover-color),
     ),
   )
 
@@ -176,7 +176,7 @@
     line(
       start: (0mm, 0mm),
       end: (0mm, drop - cy - r),
-      stroke: 1pt + bar-stroke(bar-color),
+      stroke: 1pt + bar-stroke(cover-color),
     ),
   )
 
@@ -188,14 +188,12 @@
     line(
       start: (0mm, 0mm),
       end: (100% + 30mm - cx, 0mm),
-      stroke: 1pt + bar-stroke(bar-color),
+      stroke: 1pt + bar-stroke(cover-color),
     ),
   )
 
   v(1fr)
 
   // Logo
-  if logo != none {
-    logo
-  }
+  logo
 }

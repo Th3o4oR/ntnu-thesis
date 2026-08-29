@@ -71,16 +71,16 @@
   ),
   // Faculty that the thesis is part of (abbreviation)
   faculty: "EECS",
-  // Optional image to show on the front cover.
-  // This should either be none, or an "image" element. For example,
-  // cover-image: image("./assets/cover.png", width: 100%)
-  // If provided, the image can be formatted arbitrarily to look however desired
-  // (especially its height, width, and fit mode). However, the recommended
-  // styles are (width: 100%) or (width: 16cm, height: 10cm, fit: "contain").
-  cover-image: none,
-  // Colour of rectangle to be used on the front cover.
-  // Should either be none, or a "color" element.
-  cover-color: none,
+  // Information about the cover page for the thesis
+  cover: (
+    // Whether to generate a cover page at all. Note that for the official submission,
+    // NTNU will automatically generate a cover page, so this should probably be disabled
+    // before submitting.
+    enable: true,
+    // Colour of rectangle to be used on the front cover.
+    // Should either be none, or a "color" element.
+    color: rgb("#8DA7CF"),
+  ),
   // Acknowledgements body
   acknowledgements: {
     par(lorem(100))
@@ -166,7 +166,11 @@
     "CBH",
     "SCI",
   )))
-  assert-arg-type("cover-image", cover-image, z.content(optional: true))
+  assert-arg-type("cover", cover, z.dictionary((
+    enable: z.boolean(),
+    color: z.color(),
+  )))
+  // assert-arg-type("cover-image", cover-image, z.content(optional: true))
   assert-arg-type(
     "acknowledgements",
     acknowledgements,
@@ -225,23 +229,24 @@
   set page("a4")
   set text(lang: primary-lang, size: 12pt)
 
-  front-cover(
-    title: primary-info.title,
-    subtitle: primary-info.at("subtitle", default: none),
-    authors: author-names,
-    supervisors: supervisor-names,
-    degree-name: degree.name,
-    faculty: authors.at(0).faculty,
-    department: authors.at(0).department,
-    level: degree.level,
-    date: doc-date,
-    lang: primary-lang,
-    ..if cover-image != none { (logo: cover-image) } else { (:) },
-    ..if cover-color != none { (bar-color: cover-color) } else { (:) },
-    style,
-  )
+  if cover.enable {
+    front-cover(
+      title: primary-info.title,
+      subtitle: primary-info.at("subtitle", default: none),
+      authors: author-names,
+      supervisors: supervisor-names,
+      degree-name: degree.name,
+      faculty: authors.at(0).faculty,
+      department: authors.at(0).department,
+      level: degree.level,
+      date: doc-date,
+      lang: primary-lang,
+      cover-color: cover.color,
+      style,
+    )
 
-  page[] // blank
+    page[] // blank
+  }
 
   set text(font: maybe-sans-serif(style))
 
@@ -307,8 +312,7 @@
   page[] // empty
   back-cover(
     year: doc-date.year(),
-    ..if cover-image != none { (logo: cover-image) } else { (:) },
-    ..if cover-color != none { (bar-color: cover-color) } else { (:) },
+    ..if cover.color != none { (cover-color: cover.color) } else { (:) },
     style,
   )
 }
