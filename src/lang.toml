@@ -2,8 +2,10 @@
 default-lang = "en"
 
 [lang.en]
+project-report = "Project report"
 bachelors-thesis = "Bachelor's thesis"
 masters-thesis = "Master's thesis"
+phd-thesis = "Doctoral thesis"
 in = "in"
 trondheim-norway = "Trondheim, Norway"
 uni-short = "NTNU"
@@ -26,8 +28,10 @@ figure-code = "Listing"
 separator-last = " and "                                    # Oxford comma would be weird for n=2
 
 [lang.no]
+project-report = "Prosjektoppgave"
 bachelors-thesis = "Bacheloroppgave"
 masters-thesis = "Masteroppgave"
+phd-thesis = "Doktoravhandling"
 in = "i"
 trondheim-norway = "Trondheim, Norge"
 uni-short = "NTNU"

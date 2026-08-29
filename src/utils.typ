@@ -7,6 +7,13 @@
 
 #let t = key => linguify(key, from: lang-db)
 
+#let thesis-type-keys = (
+  project: "project-report",
+  bachelor: "bachelors-thesis",
+  master: "masters-thesis",
+  phd: "phd-thesis",
+)
+
 #let months-no = (
   "Januar",
   "Februar",
@@ -114,10 +121,6 @@
   return names.join(", ", last: t("separator-last"))
 }
 
-#let omit-dict-none(d) = {
-  return d.pairs().filter(((_, v)) => v != none).to-dict()
-}
-
 // This function most definitely should not exist, but alas...
 #let content-to-string(it, mode: "plain") = {
   assert(
@@ -214,13 +217,4 @@
   } else {
     panic("Cannot serialize object: " + json.encode(it))
   }
-}
-
-#let content-to-html(content) = {
-  // trim empty paragraphs
-  let html = content-to-string(content, mode: "html")
-    .replace(regex("^(</p><p>)+"), "")
-    .replace(regex("(</p><p>)+$"), "")
-
-  "<p>" + html.trim() + "</p>"
 }

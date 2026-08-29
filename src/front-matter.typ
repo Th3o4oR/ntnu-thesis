@@ -1,4 +1,4 @@
-#import "./utils.typ": join-names, maybe-sans-serif, months-no, t
+#import "./utils.typ": join-names, maybe-sans-serif, months-no, t, thesis-type-keys
 
 #let title-page(
   title: "Example Title in Primary Language",
@@ -8,7 +8,7 @@
   degree-name: "Example degree name",
   faculty: "Example faculty",
   department: "Example department",
-  cycle: 2,
+  level: "master",
   date: datetime.today(),
   lang: "en",
   logo: image("../assets/NTNU_logo_liggende_med_visjon.svg", width: 45mm),
@@ -53,11 +53,7 @@
     [#translated-month(date) #date.year()]
   }
 
-  let thesis-type = if cycle == 1 {
-    t("bachelors-thesis")
-  } else {
-    t("masters-thesis")
-  }
+  let thesis-type = t(thesis-type-keys.at(level))
 
   let supervisor-label = if supervisors.len() == 1 {
     t("supervisor")

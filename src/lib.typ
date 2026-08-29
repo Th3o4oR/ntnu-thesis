@@ -2,7 +2,8 @@
 #import "./front-matter.typ": *
 #import "./styling-setup.typ": *
 #import "./utils.typ": (
-  assert-arg-type, extract-name, get-one-liner, maybe-sans-serif, z, z-arbitrarily-keyed-dict, z-matches-regex,
+  assert-arg-type, extract-name, get-one-liner, maybe-sans-serif, thesis-type-keys, z, z-arbitrarily-keyed-dict,
+  z-matches-regex,
 )
 
 #let ntnu-thesis(
@@ -61,12 +62,12 @@
   ),
   // Degree as part of which the thesis is conducted; all fields are mandatory.
   // Kind is the degree title conferred as listed in the third dropdown above.
-  // Cycle is either 1 (Bachelor's) or 2 (Master's), per Bologna.
+  // Level is either "project", "bachelor", "master" or "phd"
   degree: (
     code: "TCYSM",
     name: "Master's Program, Cybersecurity",
     kind: "Master of Science",
-    cycle: 2,
+    level: "master",
   ),
   // Faculty that the thesis is part of (abbreviation)
   faculty: "EECS",
@@ -156,7 +157,7 @@
     code: z.string(min: 1),
     name: z.string(min: 1),
     kind: z.string(min: 1),
-    cycle: z.number(min: 1, max: 2), // better error messages than z.choice
+    level: z.choice(thesis-type-keys.keys()),
   )))
   assert-arg-type("faculty", faculty, z.choice((
     "ABE",
@@ -232,7 +233,7 @@
     degree-name: degree.name,
     faculty: authors.at(0).faculty,
     department: authors.at(0).department,
-    cycle: degree.cycle,
+    level: degree.level,
     date: doc-date,
     lang: primary-lang,
     ..if cover-image != none { (logo: cover-image) } else { (:) },
@@ -252,7 +253,7 @@
     degree-name: degree.name,
     faculty: authors.at(0).faculty,
     department: authors.at(0).department,
-    cycle: degree.cycle,
+    level: degree.level,
     date: doc-date,
     lang: primary-lang,
     style,

@@ -71,12 +71,12 @@
   ),
   // Degree as part of which the thesis is conducted; all fields are mandatory.
   // Kind is the degree title conferred as listed in the third dropdown above.
-  // Cycle is either 1 (Bachelor's) or 2 (Master's), per Bologna.
+  // Level is either "project", "bachelor", "master" or "phd"
   degree: (
     code: "MTTK",
     name: "Kybernetikk og Robotikk",
     kind: "Master of Science",
-    cycle: 2,
+    level: "master",
   ),
   // Faculty that the thesis is part of (abbreviation)
   faculty: "EECS",

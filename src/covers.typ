@@ -1,6 +1,6 @@
 #import "@preview/tiptoe:0.4.0": line, stealth
 
-#import "./utils.typ": maybe-sans-serif, months-no, t
+#import "./utils.typ": maybe-sans-serif, months-no, t, thesis-type-keys
 
 #let bar-height = 75mm
 #let bar-inset = 5mm
@@ -17,7 +17,7 @@
   degree-name: "Example degree name",
   faculty: "Example faculty",
   department: "Example department",
-  cycle: 2,
+  level: "master",
   date: datetime.today(),
   lang: "en",
   bar-color: rgb("#8DA7CF"),
@@ -28,11 +28,7 @@
   set text(font: maybe-sans-serif(style))
 
   // --- Left Vertical Banner & Affiliation Sidebar ---
-  let thesis-type = if cycle == 1 {
-    t("bachelors-thesis")
-  } else {
-    t("masters-thesis")
-  }
+  let thesis-type = t(thesis-type-keys.at(level))
 
   // Colored ribbon at top-left
   place(
