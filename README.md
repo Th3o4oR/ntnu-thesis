@@ -1,4 +1,4 @@
-# NTNU-Thesis
+# Master-Piece-NTNU
 
 An unofficial, slightly opinionated, extensible [Typst](https://typst.app/home/)
 template for writing a Degree Project thesis for NTNU in Trondheim, Norway.
@@ -38,19 +38,19 @@ others:
 
 ## Getting Started
 
-Visit the template's [homepage](https://typst.app/universe/package/ntnu-thesis/) and
+Visit the template's [homepage](https://typst.app/universe/package/master-piece-ntnu/) and
 click "Create project in app" to try it out in the Typst web app.
 
-Alternatively, you can also run `typst init @preview/ntnu-thesis` to bootstrap a new
+Alternatively, you can also run `typst init @preview/master-piece-ntnu` to bootstrap a new
 project via the Typst CLI.
 
 ## Usage
 
-The main entrypoint is the function `ntnu-thesis`, which should be invoked with
+The main entrypoint is the function `master-piece-ntnu`, which should be invoked with
 a `show` rule at the beginning of the document:
 
 ```typ
-#show: ntnu-thesis.with(primary-lang: "en")
+#show: master-piece-ntnu.with(primary-lang: "en")
 ```
 
 Additional configuration options are passed as needed. After this rule has been
@@ -68,7 +68,7 @@ mark the subsequent sections as appendices and switch the numbering to letters:
 
 ## Configuration
 
-There are a number of options that can be passed to the `ntnu-thesis` function to
+There are a number of options that can be passed to the `master-piece-ntnu` function to
 customize how the final document looks. All of them are optional since they come
 with default values, but in most cases you'll gradually end up having to set
 all of them to get the behavior you want. Here's a description of what is

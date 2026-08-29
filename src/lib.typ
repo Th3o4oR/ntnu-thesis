@@ -13,7 +13,7 @@
 
 #import "@preview/equate:0.3.2": equate
 
-#let ntnu-thesis(
+#let master-piece-ntnu(
   // Primary document language; either "en" or "no"
   primary-lang: "en",
   // Language-specific title, subtitle, abstract, and keywords.
