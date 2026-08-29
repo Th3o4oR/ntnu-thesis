@@ -306,6 +306,8 @@
   page[] // empty
   back-cover(
     year: doc-date.year(),
+    ..if cover-image != none { (logo: cover-image) } else { (:) },
+    ..if cover-color != none { (bar-color: cover-color) } else { (:) },
     style,
   )
 }

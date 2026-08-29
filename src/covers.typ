@@ -1,9 +1,13 @@
-#import "@preview/tiptoe:0.4.0": *
+#import "@preview/tiptoe:0.4.0": line, stealth
 
 #import "./utils.typ": maybe-sans-serif, months-no, t
 
+#let bar-height = 75mm
+#let bar-inset = 5mm
 #let left-margin = 60mm
 #let bar-width = 30mm
+
+#let bar-stroke(bar-color) = bar-color.lighten(40%)
 
 #let front-cover(
   title: "Example Title in Primary Language",
@@ -16,7 +20,7 @@
   cycle: 2,
   date: datetime.today(),
   lang: "en",
-  bar-color: rgb("#D4C79B"),
+  bar-color: rgb("#8DA7CF"),
   logo: image("../assets/NTNU_logo_liggende_med_visjon.svg", width: 45mm),
   style,
 ) = {
@@ -29,9 +33,6 @@
   } else {
     t("masters-thesis")
   }
-
-  let bar-height = 75mm
-  let bar-inset = 5mm
 
   // Colored ribbon at top-left
   place(
@@ -75,7 +76,7 @@
       tip: stealth,
       start: (0mm, 0mm),
       end: (left-margin - bar-width / 3, 0mm),
-      stroke: 1pt + rgb("#F1EDE0"),
+      stroke: 1pt + bar-stroke(bar-color),
     ),
   )
 
@@ -137,18 +138,68 @@
 
 #let back-cover(
   year: 2026,
+  bar-color: rgb("#8DA7CF"),
+  logo: image("../assets/NTNU_logo_liggende_med_visjon.svg", width: 45mm),
   style,
 ) = {
-  set page(margin: (top: 65mm, bottom: 30mm, left: 74pt, right: 35mm))
+  // Margins matched to front-cover to ensure accurate physical alignment
+  set page(margin: (left: left-margin, right: 30mm, top: 40mm, bottom: 25mm))
   set text(size: 12pt, font: maybe-sans-serif(style))
+
+  let cx = 50mm
+  let cy = bar-height - 10mm
+  let r = 32mm
+  let drop = bar-height * 2 + bar-inset * 3
+
+  // Background banner spanning to the right edge (the spine on the back cover)
+  place(
+    top + left,
+    rect(
+      width: 100% + 30mm,
+      height: bar-height,
+      fill: bar-color,
+    ),
+  )
+
+  // Decorative circle overlay
+  place(
+    top + left,
+    dx: cx - r,
+    dy: cy - r,
+    circle(
+      radius: r,
+      stroke: 1pt + bar-stroke(bar-color),
+    ),
+  )
+
+  // Vertical drop line from the circle
+  place(
+    top + left,
+    dx: cx,
+    dy: cy + r,
+    line(
+      start: (0mm, 0mm),
+      end: (0mm, drop - cy - r),
+      stroke: 1pt + bar-stroke(bar-color),
+    ),
+  )
+
+  // Horizontal line turning and bleeding off the right edge
+  place(
+    top + left,
+    dx: cx,
+    dy: drop,
+    line(
+      start: (0mm, 0mm),
+      end: (100% + 30mm - cx, 0mm),
+      stroke: 1pt + bar-stroke(bar-color),
+    ),
+  )
+
   v(1fr)
 
-  set text(size: 10pt)
-  show link: it => text(fill: rgb("#1954A6"), it)
-
-  [
-    #set text(size: 8pt)
-    #t("trondheim-norway") #year \
-    #link("https://www.ntnu.no/", "www.ntnu.no")
-  ]
+  // Logo
+  if logo != none {
+    logo
+  }
 }
