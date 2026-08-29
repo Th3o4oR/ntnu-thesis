@@ -6,6 +6,13 @@
   z-matches-regex,
 )
 
+// Use codly for rendering `raw` content (code)
+// See: https://typst.app/universe/package/codly for a reference
+#import "@preview/codly:1.3.0": *
+#import "@preview/codly-languages:0.1.1": *
+
+#import "@preview/equate:0.3.2": equate
+
 #let ntnu-thesis(
   // Primary document language; either "en" or "no"
   primary-lang: "en",
@@ -264,6 +271,15 @@
     lang: primary-lang,
     style,
   )
+
+  // Initialize Codly (external package)
+  show: codly-init.with() // Comment this out to disable codly style formatting
+  codly(languages: codly-languages)
+  codly(zebra-fill: rgb("#f9f9f9"))
+
+  // Initialize Equate (external package)
+  show: equate.with(breakable: true, sub-numbering: true) // Comment this out to disable sub-equation numbering (note this will break equations, preventing compilation)
+  set math.equation(numbering: "(1.1)")
 
   copyright-page(year: doc-date.year(), authors: author-names)
 

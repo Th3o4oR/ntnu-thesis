@@ -8,12 +8,6 @@
 #show: make-glossary
 #register-glossary(acronyms)
 
-// Use codly for rendering `raw` content (code)
-// See: https://typst.app/universe/package/codly for a reference
-#import "@preview/codly:1.3.0": *
-#import "@preview/codly-languages:0.1.1": *
-#show: codly-init.with()
-
 // Configure formatting options before invoking the template;
 // For example, uncomment below to set another font (except for covers)
 // #set text(font: "New Computer Modern")

@@ -19,3 +19,12 @@ See @bg:a1 for more information.
 == Structure of the Thesis
 
 #lorem(50)
+
+== Relevant equations
+
+$
+  E = m c^2
+  \ i h.bar frac(partial, partial t) Psi = hat(H) Psi
+  \ nabla times bold(E) = - frac(partial bold(B), partial t)
+  \ e^(i pi) + 1 = 0
+$
