@@ -13,99 +13,96 @@
   lang: "en",
   logo: image("../assets/NTNU_logo_liggende_med_visjon.svg", width: 45mm),
   style,
-) = page(
-  margin: (top: 27mm, bottom: 30mm, inside: 35mm, outside: 25mm),
-  {
-    set align(left)
-    set text(size: 10pt, font: maybe-sans-serif(style))
+) = {
+  set page(margin: (top: 30mm, bottom: 30mm, inside: 35mm, outside: 25mm))
+  set align(left)
+  set text(size: 10pt, font: maybe-sans-serif(style))
 
-    // --- Author, title, subtitle (optional) ---
-    let author-text = text(
-      size: 16pt,
-      fill: rgb("#555555"),
-      authors.join(", "),
-    )
-    let title-text = text(
-      size: 22pt,
-      weight: "bold",
-      title,
-    )
-    let subtitle-text = if subtitle != none {
-      text(size: 13pt, subtitle)
-    }
+  // --- Author, title, subtitle (optional) ---
+  let author-text = text(
+    size: 16pt,
+    fill: rgb("#555555"),
+    authors.join(", "),
+  )
+  let title-text = text(
+    size: 22pt,
+    weight: "bold",
+    title,
+  )
+  let subtitle-text = if subtitle != none {
+    text(size: 13pt, subtitle)
+  }
 
-    [
-      #author-text
+  [
+    #author-text
 
-      #title-text
+    #title-text
 
-      #subtitle-text
+    #subtitle-text
+  ]
+
+  v(1fr)
+
+  // Necessary as of 2026-08-24 because datetime.display doesn't automatically translate based on the text language.
+  // See: https://github.com/typst/typst/issues/2840
+  // And: https://github.com/typst/typst/issues/1537
+  let formatted-date = if lang == "en" [
+    #date.display("[month repr:long] [year]")
+  ] else {
+    let translated-month(dt) = months-no.at(dt.month() - 1)
+    [#translated-month(date) #date.year()]
+  }
+
+  let thesis-type = if cycle == 1 {
+    t("bachelors-thesis")
+  } else {
+    t("masters-thesis")
+  }
+
+  let supervisor-label = if supervisors.len() == 1 {
+    t("supervisor")
+  } else {
+    t("supervisors")
+  }
+
+  [
+    #thesis-type #t("in") #degree-name \
+    #if supervisors != () and supervisors != none [
+      #supervisor-label: #supervisors.join(", ") \
     ]
+    #formatted-date
 
-    v(1fr)
+    \
 
-    // Necessary as of 2026-08-24 because datetime.display doesn't automatically translate based on the text language.
-    // See: https://github.com/typst/typst/issues/2840
-    // And: https://github.com/typst/typst/issues/1537
-    let formatted-date = if lang == "en" [
-      #date.display("[month repr:long] [year]")
-    ] else {
-      let translated-month(dt) = months-no.at(dt.month() - 1)
-      [#translated-month(date) #date.year()]
-    }
+    #t("uni-long") \
+    #if faculty != none [ #faculty \ ]
+    #if department != none [ #department \ ]
+  ]
 
-    let thesis-type = if cycle == 1 {
-      t("bachelors-thesis")
-    } else {
-      t("masters-thesis")
-    }
+  v(2.5em)
 
-    let supervisor-label = if supervisors.len() == 1 {
-      t("supervisor")
-    } else {
-      t("supervisors")
-    }
-
-    [
-      #thesis-type #t("in") #degree-name \
-      #if supervisors != () and supervisors != none [
-        #supervisor-label: #supervisors.join(", ") \
-      ]
-      #formatted-date
-
-      \
-
-      #t("uni-long") \
-      #if faculty != none [ #faculty \ ]
-      #if department != none [ #department \ ]
-    ]
-
-    v(2.5em)
-
-    // --- NTNU Logo ---
-    if logo != none {
-      logo
-    } else {
-      image("../assets/ntnu_logo.svg", width: 44mm)
-    }
-  },
-)
+  // --- NTNU Logo ---
+  if logo != none {
+    logo
+  } else {
+    image("../assets/ntnu_logo.svg", width: 44mm)
+  }
+}
 
 #let copyright-page(
   year: 2026,
   authors: ("Astronaut Boulder", "Cat Dog"),
   publisher: "NTNU",
-) = page(
-  margin: (top: 27mm, bottom: 30mm, inside: 35mm, outside: 25mm),
-  {
-    v(1fr)
-    set text(size: 9pt, fill: rgb("#555555"))
-    [
-      #sym.copyright #year #if type(authors) == array { authors.join(", ") } else { authors } \
-      #publisher
-    ]
-  },
-)
+) = {
+  set page(margin: (top: 27mm, bottom: 30mm, inside: 35mm, outside: 25mm))
+  set text(size: 9pt, fill: rgb("#555555"))
+
+  v(1fr)
+  [
+    #sym.copyright #year #if type(authors) == array { authors.join(", ") } else { authors } \
+    #publisher
+  ]
+}
 
 #let localized-abstract(
   lang: "en",

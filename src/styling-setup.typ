@@ -6,26 +6,41 @@
 #let header(style) = context {
   set text(font: maybe-sans-serif(style))
 
-  let chapter = hydra(1, skip-starting: false, display: (ctx, h) => h.body)
+  let chapter = hydra(1, skip-starting: false)
+
+  let alignment = if calc.odd(here().page()) {
+    right
+  } else {
+    left
+  }
+
+  align(alignment, emph[#chapter])
+  line(length: 100%)
+}
+
+#let footer(style) = context {
+  set text(font: maybe-sans-serif(style))
 
   let number = counter(page).display(here().page-numbering())
 
-  if calc.odd(here().page()) {
-    align(right, [#chapter | #number])
-  } else {
-    align(left, [#number | #chapter])
-  }
+  line(length: 100%)
+  align(center, number)
 }
 
 #let global-setup(style, body) = context {
   set page(
     // I don't like these numbers, especially the bottom margin...
-    margin: (top: 27mm, bottom: 30mm, inside: 35mm, outside: 25mm),
-    header-ascent: 15mm + 6mm,
-    footer-descent: 25mm,
+    margin: (top: 30mm, bottom: 30mm, inside: 35mm, outside: 25mm),
+    header-ascent: 10mm,
+    footer-descent: 10mm,
     header: header(style),
-    footer: none,
+    footer: footer(style),
   )
+
+  show selector.or(
+    pagebreak.where(to: "odd"),
+    pagebreak.where(to: "even"),
+  ): set page(header: none, footer: none)
 
   set par(justify: true)
 

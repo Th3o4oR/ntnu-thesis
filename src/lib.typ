@@ -265,28 +265,23 @@
     counter(page).update(1)
 
     for (lang, info) in localized-info {
-      page(
-        localized-abstract(
-          lang: lang,
-          abstract-heading: info.at("abstract-heading", default: none),
-          keywords-heading: info.at("keywords-heading", default: none),
-          keywords: info.at("keywords"),
-          info.at("abstract"),
-        ),
+      localized-abstract(
+        lang: lang,
+        abstract-heading: info.at("abstract-heading", default: none),
+        keywords-heading: info.at("keywords-heading", default: none),
+        keywords: info.at("keywords"),
+        info.at("abstract"),
       )
       page(header: none, footer: none, []) // blank
     }
 
-    page(
-      signed-acknowledgements(
-        city: doc-city,
-        date: doc-date,
-        authors: author-names,
-        acknowledgements,
-      ),
+    signed-acknowledgements(
+      city: doc-city,
+      date: doc-date,
+      authors: author-names,
+      acknowledgements,
     )
-
-    page(indices)
+    indices
 
     for extra in extra-preambles {
       extra-preamble(title: extra.at("heading"), extra.at("body"))
