@@ -26,15 +26,6 @@
       abstract: lorem(300),
       keywords: ("Hunder", "Kyllingnuggets"),
     ),
-    pt: (
-      alpha-3: "por",
-      title: "Tradução em Português do Título",
-      subtitle: "Tradução em Português do Subtítulo",
-      abstract-heading: "Resumo",
-      keywords-heading: "Palavras-chave",
-      abstract: lorem(300),
-      keywords: ("Cães", "Nuggets de frango"),
-    ),
   ),
   // Ordered author information; only first and last names fields are mandatory
   authors: (
