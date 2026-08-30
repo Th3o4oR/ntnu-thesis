@@ -1,4 +1,5 @@
-#import "@preview/master-piece-ntnu:0.3.0": master-piece-ntnu, setup-appendices
+// #import "@preview/master-piece-ntnu:0.3.0": master-piece-ntnu, setup-appendices
+#import "/src/lib.typ": master-piece-ntnu, setup-appendices
 
 // The template is extensible and plays well with other dependencies;
 // For example, a table of acronyms can be generated using glossarium
@@ -17,6 +18,7 @@
 #show: master-piece-ntnu.with(
   // Primary document language; either "en" or "no"
   primary-lang: "no",
+
   // Language-specific title, subtitle, abstract, and keywords.
   // Grouped by language, with only values for "en" and "no" being mandatory.
   // Localized abstract/keywords headings may be omitted only for "en" and "no".
@@ -36,6 +38,7 @@
       keywords: ("Forsvunne figurer", "Bærekraftig formatering"),
     ),
   ),
+
   // Ordered author information; only first and last names fields are mandatory
   authors: (
     (
@@ -51,6 +54,7 @@
       last-names: "Doe",
     ),
   ),
+
   // Ordered supervisor information; "external-org" replaces userid/faculty/dept
   supervisors: (
     (
@@ -68,6 +72,7 @@
       external-org: "Selskap AS",
     ),
   ),
+
   // Degree as part of which the thesis is conducted; all fields are mandatory.
   // Kind is the degree title conferred as listed in the third dropdown above.
   // Level is either "project", "bachelor", "master" or "phd"
@@ -77,10 +82,13 @@
     kind: "Master of Unapplied Sciences",
     level: "master",
   ),
+
   // Faculty that the thesis is part of
   faculty: "Faculty of Fast Compilation Times",
+
   // Department that the thesis is part of
   department: "Department of Typesetting Sanity",
+
   // Information about the cover page for the thesis
   cover: (
     // Whether to generate a cover page at all. Note that for the official submission,
@@ -90,22 +98,32 @@
     // Colour of rectangle to be used on the front cover.
     color: rgb("#8DA7CF"),
   ),
+
+  // Logo
+  // logo: image("assets/ntnu-logo.png", width: 45mm),
+
   // Different margins for alternating pages. Adds extra margins to the inside-side of
   // each page, which helps keep all text legible when binding the thesis like a book,
   // but can look weird when presented as a PDF on a screen.
   alternating-margins: true,
+
   // Acknowledgements body
   acknowledgements: include "content/acknowledgements.typ",
+
   // Additional front-matter sections, each with keys "heading" and "body"
   extra-preambles: (
     (heading: "Acronyms and Abbreviations", body: print-glossary(acronyms)),
   ),
+
   // Document date; hardcode for determinism/reproducibility
   doc-date: datetime.today(),
+
   // Document city (where it's being signed/authored/submitted)
   doc-city: "Trondheim",
+
   // Extra keywords, embedded in document metadata but not listed in text
   doc-extra-keywords: ("master thesis",),
+
   // Miscellaneous settings affecting the document's appearance
   style: (
     // Whether the proprietary Arial font should be used in Sans-Serif contexts.
@@ -116,8 +134,10 @@
     // on the system at compile-time.
     // Graceful font fallback is not possible until issue typst#6010 is fixed.
     use-arial: false,
+
     // Whether front matter, headings, and headings should use a Sans-Serif font
     more-sans-serif: false,
+
     // Whether to make top-level headings stand out more and look less plain
     fancy-chapters: false,
   ),
